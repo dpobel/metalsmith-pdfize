@@ -26,6 +26,7 @@ function serveMetalsmithFiles(files) {
         const localPath = req.url.replace(/^\/+/, '');
 
         if ( !files[localPath] ) {
+            console.warn(`[metalsmith-pdfize] Unable to serve "${req.url}" from file list`);
             res.writeHead(404);
             return res.end();
         }
