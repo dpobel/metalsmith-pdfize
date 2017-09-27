@@ -1,6 +1,7 @@
 const pdfize = require('../pdfize');
 const assert = require('assert');
 const sinon = require('sinon');
+const puppeteer = require('puppeteer');
 const metalsmith = null;
 
 describe('Metalsmith pdfize', function () {
@@ -41,7 +42,47 @@ describe('Metalsmith pdfize', function () {
     });
 
     describe('print options', function () {
-        it('should pass print options to page.pdf()');
+        let Page, browser;
+
+        // that's a bit hackish, puppeteer does not expose the Page constructor
+        // so we first launch a browser and create a new page to retrieve it to
+        // be able to spy `Page#pdf()`
+        before(function (done) {
+            puppeteer.launch()
+                .then((b) => {
+                    browser = b;
+                    return browser.newPage();
+                })
+                .then((page) => {
+                    Page = page.constructor;
+                    done();
+                });
+        });
+
+        after(function (done) {
+            browser.close().then(done);
+        });
+
+        beforeEach(function () {
+            sinon.spy(Page.prototype, 'pdf');
+        });
+
+        afterEach(function () {
+            Page.prototype.pdf.restore();
+        });
+
+        it('should pass print options to page.pdf()', function (done) {
+            const printOptions = {};
+
+            pdfize({
+                pattern: 'random.html',
+                printOptions,
+            })(files, metalsmith, function () {
+                assert(Page.prototype.pdf.called);
+                assert.strictEqual(Page.prototype.pdf.firstCall.args[0], printOptions);
+                done();
+            });
+        });
     });
 
     describe('internal server', function () {
