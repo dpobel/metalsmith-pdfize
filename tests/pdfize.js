@@ -20,6 +20,8 @@ describe('Metalsmith pdfize', function () {
     const pattern = '*pdf*';
     const patterns = ['i-want-a-pdf*', 'another-to-pdf*'];
 
+    this.timeout(4000);
+
     describe('matching', function () {
         it('should create a pdf for matched documents', function (done) {
             pdfize({pattern})(files, metalsmith, function () {
