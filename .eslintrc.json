@@ -27,7 +27,8 @@
         "camelcase": "error",
         "capitalized-comments": [
             "error",
-            "always"
+            "always",
+            {"ignoreInlineComments": true}
         ],
         "class-methods-use-this": "error",
         "comma-dangle": "off",
@@ -78,10 +79,8 @@
         "guard-for-in": "error",
         "handle-callback-err": "error",
         "id-blacklist": "error",
-        "id-length": "error",
         "id-match": "error",
         "indent": "error",
-        "init-declarations": "error",
         "jsx-quotes": "error",
         "key-spacing": "error",
         "keyword-spacing": "error",
@@ -116,6 +115,7 @@
         "no-catch-shadow": "error",
         "no-compare-neg-zero": "error",
         "no-confusing-arrow": "error",
+        "no-console": ["error", {"allow": ["warn", "error"]}],
         "no-continue": "error",
         "no-div-regex": "error",
         "no-duplicate-imports": "error",
@@ -202,7 +202,6 @@
         "no-whitespace-before-property": "error",
         "no-with": "error",
         "nonblock-statement-body-position": "error",
-        "object-curly-newline": "error",
         "object-curly-spacing": [
             "error",
             "never"
@@ -214,7 +213,6 @@
         "operator-assignment": "error",
         "operator-linebreak": "error",
         "padded-blocks": "off",
-        "prefer-arrow-callback": "error",
         "prefer-const": "error",
         "prefer-destructuring": "error",
         "prefer-numeric-literals": "error",
@@ -235,10 +233,6 @@
         "semi": "error",
         "semi-spacing": "error",
         "sort-imports": "error",
-        "sort-keys": [
-            "error",
-            "desc"
-        ],
         "sort-vars": "error",
         "space-before-blocks": "error",
         "space-before-function-paren": "off",
