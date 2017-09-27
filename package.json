@@ -4,7 +4,9 @@
   "description": "Metalsmith plugin to convert or export files to PDF.",
   "main": "pdfize.js",
   "scripts": {
-    "test": "npm run lint",
+    "test": "npm run lint && npm run unit-test",
+    "unit-test": "./node_modules/.bin/mocha tests",
+    "coverage": "./node_modules/.bin/nyc -x tests npm run unit-test",
     "lint": "./node_modules/.bin/eslint *.js"
   },
   "keywords": [
@@ -21,6 +23,9 @@
     "puppeteer": "^0.11.0"
   },
   "devDependencies": {
-    "eslint": "^4.7.2"
+    "eslint": "^4.7.2",
+    "mocha": "^3.5.3",
+    "nyc": "^11.2.1",
+    "sinon": "^4.0.0"
   }
 }

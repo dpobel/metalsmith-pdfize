@@ -4,10 +4,11 @@ const multimatch = require('multimatch');
 const async = require('async');
 
 function pdfize(serverInfo, browser, printOptions, files, path, callback) {
-    const pdfPath = path + '.pdf'; // TODO not super nice
+    const pdfPath = path + '.pdf'; // FIXME see https://github.com/dpobel/metalsmith-pdfize/issues/4
+    const internalUrl = `http://${serverInfo.address}:${serverInfo.port}/${path}`;
 
     browser.newPage()
-        .then((page) => page.goto(`http://${serverInfo.address}:${serverInfo.port}/${path}`, {waitUntil: 'networkidle'})
+        .then((page) => page.goto(internalUrl, {waitUntil: 'networkidle'})
             .then(() => page.pdf(printOptions))
             .catch(callback)
         )
@@ -26,6 +27,7 @@ function serveMetalsmithFiles(files) {
         const localPath = req.url.replace(/^\/+/, '');
 
         if ( !files[localPath] ) {
+            console.warn(`[metalsmith-pdfize] Unable to serve "${req.url}" from file list`);
             res.writeHead(404);
             return res.end();
         }
