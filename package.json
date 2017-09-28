@@ -9,6 +9,10 @@
     "coverage": "./node_modules/.bin/nyc -x tests npm run unit-test",
     "lint": "./node_modules/.bin/eslint *.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dpobel/metalsmith-pdfize.git"
+  },
   "keywords": [
     "metalsmith",
     "plugin",
@@ -17,6 +21,10 @@
   ],
   "author": "Damien Pobel",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dpobel/metalsmith-pdfize/issues"
+  },
+  "homepage": "https://github.com/dpobel/metalsmith-pdfize",
   "dependencies": {
     "async": "^2.5.0",
     "multimatch": "^2.1.0",
