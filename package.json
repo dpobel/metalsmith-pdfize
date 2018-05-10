@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-pdfize",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Metalsmith plugin to export files to PDF.",
   "main": "pdfize.js",
   "scripts": {
