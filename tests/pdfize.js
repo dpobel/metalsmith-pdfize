@@ -5,23 +5,27 @@ const puppeteer = require('puppeteer');
 const metalsmith = null;
 
 describe('Metalsmith pdfize', function () {
-    const files = {
-        'i-want-a-pdf.html': {contents: ''},
-        'another-to-pdf.html': {contents: ''},
-        'random.html': {contents: ''},
-        'broken-internal.html': {contents: `
-            <html>
-                <body>
-                    <p>Broken external reference</p>
-                    <img src="/do/not/exist.png">
-                </body>
-            </html>
-        `},
-    };
+    let files;
     const pattern = '*pdf*';
     const patterns = ['i-want-a-pdf*', 'another-to-pdf*'];
 
     this.timeout(4000);
+
+    beforeEach(() => {
+        files = {
+            'i-want-a-pdf.html': {contents: ''},
+            'another-to-pdf.html': {contents: ''},
+            'random.html': {contents: ''},
+            'broken-internal.html': {contents: `
+                <html>
+                    <body>
+                        <p>Broken external reference</p>
+                        <img src="/do/not/exist.png">
+                    </body>
+                </html>
+            `},
+        };
+    });
 
     describe('matching', function () {
         it('should create a pdf for matched documents', function (done) {
