@@ -8,7 +8,7 @@ function pdfize(serverInfo, browser, printOptions, files, path, callback) {
     const internalUrl = `http://${serverInfo.address}:${serverInfo.port}/${path}`;
 
     browser.newPage()
-        .then((page) => page.goto(internalUrl, {waitUntil: 'networkidle'})
+        .then((page) => page.goto(internalUrl, {waitUntil: 'networkidle0'})
             .then(() => page.pdf(printOptions))
             .catch(callback)
         )
