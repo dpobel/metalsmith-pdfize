@@ -7,7 +7,6 @@ Internally, it uses Chrome in headless mode with
 of any file registered in Metalsmith with `print` CSS media.
 
 [![Build Status](https://travis-ci.org/dpobel/metalsmith-pdfize.svg?branch=master)](https://travis-ci.org/dpobel/metalsmith-pdfize)
-[![Dependency Status](https://gemnasium.com/badges/github.com/dpobel/metalsmith-pdfize.svg)](https://gemnasium.com/github.com/dpobel/metalsmith-pdfize)
 
 ## Installation
 
