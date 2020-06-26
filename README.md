@@ -6,7 +6,7 @@ Internally, it uses Chrome in headless mode with
 [Puppeteer](https://www.npmjs.com/package/puppeteer) to generate a PDF version
 of any file registered in Metalsmith with `print` CSS media.
 
-[![Build Status](https://travis-ci.org/dpobel/metalsmith-pdfize.svg?branch=master)](https://travis-ci.org/dpobel/metalsmith-pdfize)
+[![Build Status](https://travis-ci.org/dpobel/metalsmith-pdfize.svg?branch=main)](https://travis-ci.org/dpobel/metalsmith-pdfize)
 
 ## Installation
 
