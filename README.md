@@ -39,7 +39,7 @@ The `pdfize` function accepts an option object with 2 entries:
    pattern(s) matching files that should be loaded and exported to PDF
 1. `printOptions`: an object that is directly passed to puppeteer `Page#pdf()`
    function to control headless Chrome behaviour. See [Puppeteer
-   documentation](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#pagepdfoptions)
+   documentation](https://github.com/GoogleChrome/puppeteer/blob/main/docs/api.md#pagepdfoptions)
    for available options.
 
 PDF files are registered into Metalsmith files list. Generated PDF files are
