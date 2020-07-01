@@ -31,7 +31,7 @@
   "dependencies": {
     "async": "^3.1.0",
     "multimatch": "^4.0.0",
-    "puppeteer": "^3.0.0"
+    "puppeteer": "^4.0.1"
   },
   "devDependencies": {
     "eslint": "^7.1.0",
