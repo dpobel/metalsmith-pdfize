@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "eslint": "^7.1.0",
+    "is-pdf": "^1.0.0",
     "metalsmith": "^2.3.0",
     "mocha": "^8.0.1",
     "nyc": "^15.0.1",

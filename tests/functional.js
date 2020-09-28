@@ -2,6 +2,7 @@ const metalsmith = require('metalsmith');
 const pdfize = require('../pdfize');
 const fs = require('fs');
 const assert = require('assert');
+const isPdf = require('is-pdf');
 
 describe('Metalsmith pdfize functional tests', function () {
     const buildDir = 'build/';
@@ -32,9 +33,11 @@ describe('Metalsmith pdfize functional tests', function () {
         assert(fs.existsSync(fileDir + 'random.html'));
 
         assert(fs.existsSync(fileDir + 'another-to-pdf.html.pdf'));
+        assert(isPdf(fs.readFileSync(fileDir + 'another-to-pdf.html.pdf')));
         assert(fs.existsSync(fileDir + 'another-to-pdf.html'));
 
         assert(fs.existsSync(fileDir + 'i-want-a-pdf.html.pdf'));
+        assert(isPdf(fs.readFileSync(fileDir + 'i-want-a-pdf.html.pdf')));
         assert(fs.existsSync(fileDir + 'i-want-a-pdf.html'));
     });
 });
