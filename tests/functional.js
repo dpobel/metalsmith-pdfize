@@ -9,6 +9,7 @@ describe('Metalsmith pdfize functional tests', function () {
     const ms = metalsmith(__dirname);
 
     beforeEach((done) => {
+        ms.clean(true);
         ms.use(pdfize({
             pattern: ['*pdf.html'],
             printOptions: {
@@ -21,10 +22,6 @@ describe('Metalsmith pdfize functional tests', function () {
             done(error);
         });
     });
-
-    afterEach(() => {
-        ms.clean();
-    })
 
     it('should produce pdfs', function () {
         const fileDir = __dirname + '/' + buildDir;
