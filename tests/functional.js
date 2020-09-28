@@ -3,6 +3,7 @@ const pdfize = require('../pdfize');
 const fs = require('fs');
 const assert = require('assert');
 const isPdf = require('is-pdf');
+const path = require('path');
 
 describe('Metalsmith pdfize functional tests', function () {
     const buildDir = 'build/';
@@ -24,7 +25,7 @@ describe('Metalsmith pdfize functional tests', function () {
     });
 
     it('should produce pdfs', function () {
-        const fileDir = __dirname + '/' + buildDir;
+        const fileDir = path.join([__dirname, buildDir]);
 
         assert(!fs.existsSync(fileDir + 'random.html.pdf'));
         assert(fs.existsSync(fileDir + 'random.html'));
