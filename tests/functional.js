@@ -25,7 +25,7 @@ describe('Metalsmith pdfize functional tests', function () {
     });
 
     it('should produce pdfs', function () {
-        const fileDir = path.join([__dirname, buildDir]);
+        const fileDir = path.join(__dirname, buildDir);
 
         assert(!fs.existsSync(fileDir + 'random.html.pdf'));
         assert(fs.existsSync(fileDir + 'random.html'));
