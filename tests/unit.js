@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const puppeteer = require('puppeteer');
 const metalsmith = null;
 
-describe('Metalsmith pdfize', function () {
+describe('Metalsmith pdfize unit tests', function () {
     let files;
     const pattern = '*pdf*';
     const patterns = ['i-want-a-pdf*', 'another-to-pdf*'];
