@@ -10,7 +10,7 @@ of any file registered in Metalsmith with `print` CSS media.
 
 ## Installation
 
-Because of Puppeteer, this plugin requires at least Node v6.4.0.
+This plugin requires Node.js 12 or later
 
 ```
 $ npm install metalsmith-pdfize
