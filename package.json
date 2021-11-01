@@ -33,7 +33,7 @@
     "puppeteer": "^10.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.1.0",
+    "eslint": "^8.1.0",
     "is-pdf": "^1.0.0",
     "metalsmith": "^2.3.0",
     "mocha": "^9.0.1",
