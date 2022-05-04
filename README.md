@@ -30,6 +30,7 @@ metalsmith.use(pdfize({
         printBackground: true,
         format: 'A4',
     },
+    launchOptions: {},
 });
 ```
 
@@ -37,9 +38,13 @@ The `pdfize` function accepts an option object with 2 entries:
 
 1. `pattern`: a [multimatch](https://www.npmjs.com/package/multimatch)
    pattern(s) matching files that should be loaded and exported to PDF
-1. `printOptions`: an object that is directly passed to puppeteer `Page#pdf()`
+2. `printOptions`: an object that is directly passed to puppeteer `Page#pdf()`
    function to control headless Chrome behaviour. See [Puppeteer
    documentation](https://github.com/GoogleChrome/puppeteer/blob/main/docs/api.md#pagepdfoptions)
+   for available options.
+3. `launchOptions` an object that is directly passed to puppeteer `Puppeteer#launch()`
+   function to control headless Chrome behaviour. See [Puppeteer
+   documentation](https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#puppeteerlaunchoptions)
    for available options.
 
 PDF files are registered into Metalsmith files list. Generated PDF files are
