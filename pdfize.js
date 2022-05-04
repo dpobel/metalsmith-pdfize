@@ -42,7 +42,7 @@ module.exports = function (options) {
         const toExport = multimatch(Object.keys(files), options.pattern);
 
         server.listen(0, '127.0.0.1', () => {
-            puppeteer.launch().then((browser) => {
+            puppeteer.launch(options.launchOptions).then((browser) => {
                 const pdfizeFn = pdfize.bind(null, server.address(), browser, options.printOptions, files);
 
                 async.each(toExport, pdfizeFn, (err) => {
