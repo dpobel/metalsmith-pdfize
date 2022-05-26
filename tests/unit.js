@@ -89,6 +89,29 @@ describe('Metalsmith pdfize unit tests', function () {
         });
     });
 
+    describe('launch options', function () {
+        beforeEach(() => {
+            sinon.spy(puppeteer, 'launch');
+        });
+
+        afterEach(() => {
+            puppeteer.launch.restore();
+        });
+
+        it('should pass launch options to puppeteer.launch()', function (done) {
+            const launchOptions = {};
+
+            pdfize({
+                pattern: 'random.html',
+                launchOptions,
+            })(files, metalsmith, function () {
+                assert(puppeteer.launch.called);
+                assert.strictEqual(puppeteer.launch.firstCall.args[0], launchOptions);
+                done();
+            });
+        });
+    });
+
     describe('internal server', function () {
         beforeEach(function () {
             sinon.stub(console, 'warn');
