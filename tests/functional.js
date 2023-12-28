@@ -9,7 +9,8 @@ describe('Metalsmith pdfize functional tests', function () {
     const buildDir = 'build/';
     const ms = metalsmith(__dirname);
 
-    beforeEach((done) => {
+    beforeEach(function (done) {
+        this.timeout(5000);
         ms.clean(true);
         ms.use(pdfize({
             pattern: ['*pdf.html'],

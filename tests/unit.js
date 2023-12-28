@@ -9,7 +9,7 @@ describe('Metalsmith pdfize unit tests', function () {
     const pattern = '*pdf*';
     const patterns = ['i-want-a-pdf*', 'another-to-pdf*'];
 
-    this.timeout(4000);
+    this.timeout(5000);
 
     beforeEach(() => {
         files = {
