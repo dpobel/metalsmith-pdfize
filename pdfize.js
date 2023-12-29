@@ -4,7 +4,7 @@ const multimatch = require("multimatch");
 const async = require("async");
 
 function pdfize(serverInfo, browser, printOptions, files, path, callback) {
-  const pdfPath = path + ".pdf"; // FIXME see https://github.com/dpobel/metalsmith-pdfize/issues/4
+  const pdfPath = path + ".pdf";
   const internalUrl = `http://${serverInfo.address}:${serverInfo.port}/${path}`;
 
   browser
