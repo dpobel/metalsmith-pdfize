@@ -1,8 +1,5 @@
 {
-    "env": {
-        "mocha": true
-    },
-    "rules": {
-        "no-sync": 0
-    }
+  "env": {
+    "mocha": true
+  }
 }

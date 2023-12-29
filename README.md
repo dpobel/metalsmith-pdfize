@@ -59,15 +59,15 @@ used if you need to rename generated PDF.
 
 ```json
 {
-    "plugin": {
-        "metalsmith-pdfize": {
-            "pattern": ["page/cv/*", "another/page/*html"],
-            "printOptions": {
-                "printBackground": true,
-                "format": "A4"
-            }
-        }
+  "plugin": {
+    "metalsmith-pdfize": {
+      "pattern": ["page/cv/*", "another/page/*html"],
+      "printOptions": {
+        "printBackground": true,
+        "format": "A4"
+      }
     }
+  }
 }
 ```
 
