@@ -55,7 +55,7 @@ describe("Metalsmith pdfize unit tests", function () {
     // be able to spy `Page#pdf()`
     before(function (done) {
       puppeteer
-        .launch()
+        .launch({ headless: "new" })
         .then((b) => {
           browser = b;
           return browser.newPage();
@@ -101,7 +101,7 @@ describe("Metalsmith pdfize unit tests", function () {
       puppeteer.launch.restore();
     });
 
-    it("should pass launch options to puppeteer.launch()", function (done) {
+    it("should pass launch options to puppeteer.launch() and set the new headless mode", function (done) {
       const launchOptions = {};
 
       pdfize({
@@ -109,7 +109,13 @@ describe("Metalsmith pdfize unit tests", function () {
         launchOptions,
       })(files, metalsmith, function () {
         assert(puppeteer.launch.called);
-        assert.strictEqual(puppeteer.launch.firstCall.args[0], launchOptions);
+        assert.equal(
+          JSON.stringify(puppeteer.launch.firstCall.args[0]),
+          JSON.stringify({
+            headless: "new",
+            ...launchOptions,
+          }),
+        );
         done();
       });
     });
