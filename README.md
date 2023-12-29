@@ -40,7 +40,7 @@ The `pdfize` function accepts an option object with 3 entries:
    pattern(s) matching files that should be loaded and exported to PDF
 2. `printOptions`: an object that is directly passed to puppeteer `Page#pdf()`
    function to control headless Chrome behaviour. See [Puppeteer
-   documentation](https://github.com/GoogleChrome/puppeteer/blob/main/docs/api.md#pagepdfoptions)
+   documentation](https://pptr.dev/api/puppeteer.pdfoptions)
    for available options.
 3. `launchOptions` an object that is passed to puppeteer `Puppeteer#launch()`
    function to control headless Chrome behaviour. See [Puppeteer
