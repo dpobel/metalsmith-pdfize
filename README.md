@@ -40,12 +40,12 @@ The `pdfize` function accepts an option object with 3 entries:
    pattern(s) matching files that should be loaded and exported to PDF
 2. `printOptions`: an object that is directly passed to puppeteer `Page#pdf()`
    function to control headless Chrome behaviour. See [Puppeteer
-   documentation](https://github.com/GoogleChrome/puppeteer/blob/main/docs/api.md#pagepdfoptions)
+   documentation](https://pptr.dev/api/puppeteer.pdfoptions)
    for available options.
-3. `launchOptions` an object that is directly passed to puppeteer `Puppeteer#launch()`
+3. `launchOptions` an object that is passed to puppeteer `Puppeteer#launch()`
    function to control headless Chrome behaviour. See [Puppeteer
-   documentation](https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#puppeteerlaunchoptions)
-   for available options.
+   documentation](https://pptr.dev/api/puppeteer.browserlaunchargumentoptions)
+   for available options. The `headless` is set by default to `new` but it can be overridden if needed.
 
 PDF files are registered into Metalsmith files list. Generated PDF files are
 named after the file used as source with the `.pdf` suffix. For instance, if a
