@@ -10,30 +10,38 @@ describe("Metalsmith pdfize functional tests", function () {
   const buildDir = "build/";
   const fileDir = path.join(__dirname, buildDir);
 
-  const build = async ({
-    pattern,
-    printOptions = undefined,
-    launchOptions = undefined,
-  }) => {
+  before(async () => {
+    sinon.stub(console, "warn");
+
     const ms = metalsmith(__dirname);
     ms.clean(true);
     ms.use(
       pdfize({
-        pattern,
-        printOptions,
-        launchOptions,
+        pattern: "*pdf.html",
+      }),
+    );
+    ms.use(
+      pdfize({
+        pattern: ["random.html", "pdf*", "broken.html"],
+        printOptions: {
+          height: "500px",
+          width: "500px",
+        },
+        launchOptions: {
+          args: ["--user-agent=metalsmith-pdfize"],
+        },
       }),
     );
     ms.destination(buildDir);
     await ms.build();
-  };
+  });
+
+  after(async () => {
+    console.warn.restore();
+  });
 
   describe("matching", () => {
     it("should create a pdf for matched documents", async function () {
-      await build({ pattern: "*pdf.html" });
-      assert(!fs.existsSync(fileDir + "random.html.pdf"));
-      assert(fs.existsSync(fileDir + "random.html"));
-
       assert(fs.existsSync(fileDir + "another-to-pdf.html.pdf"));
       assert(isPdf(fs.readFileSync(fileDir + "another-to-pdf.html.pdf")));
       assert(fs.existsSync(fileDir + "another-to-pdf.html"));
@@ -41,20 +49,19 @@ describe("Metalsmith pdfize functional tests", function () {
       assert(fs.existsSync(fileDir + "i-want-a-pdf.html.pdf"));
       assert(isPdf(fs.readFileSync(fileDir + "i-want-a-pdf.html.pdf")));
       assert(fs.existsSync(fileDir + "i-want-a-pdf.html"));
+
+      assert(!fs.existsSync(fileDir + "left-alone.html.pdf"));
+      assert(fs.existsSync(fileDir + "left-alone.html"));
     });
 
     it("should support several match pattern", async function () {
-      await build({ pattern: ["i-want-a-pdf*", "another-to-pdf*"] });
-      assert(!fs.existsSync(fileDir + "random.html.pdf"));
+      assert(fs.existsSync(fileDir + "random.html.pdf"));
+      assert(isPdf(fs.readFileSync(fileDir + "random.html.pdf")));
       assert(fs.existsSync(fileDir + "random.html"));
 
-      assert(fs.existsSync(fileDir + "another-to-pdf.html.pdf"));
-      assert(isPdf(fs.readFileSync(fileDir + "another-to-pdf.html.pdf")));
-      assert(fs.existsSync(fileDir + "another-to-pdf.html"));
-
-      assert(fs.existsSync(fileDir + "i-want-a-pdf.html.pdf"));
-      assert(isPdf(fs.readFileSync(fileDir + "i-want-a-pdf.html.pdf")));
-      assert(fs.existsSync(fileDir + "i-want-a-pdf.html"));
+      assert(fs.existsSync(fileDir + "pdf-i-want.html.pdf"));
+      assert(isPdf(fs.readFileSync(fileDir + "pdf-i-want.html.pdf")));
+      assert(fs.existsSync(fileDir + "pdf-i-want.html"));
     });
   });
 
@@ -67,13 +74,6 @@ describe("Metalsmith pdfize functional tests", function () {
 
     describe("print options", () => {
       it("should take print options into account", async function () {
-        await build({
-          pattern: "random.html",
-          printOptions: {
-            height: "500px",
-            width: "500px",
-          },
-        });
         const pdf = await pdfjsLib.getDocument(fileDir + "random.html.pdf")
           .promise;
 
@@ -85,12 +85,6 @@ describe("Metalsmith pdfize functional tests", function () {
 
     describe("launch options", () => {
       it("should take launch options into account", async function () {
-        await build({
-          pattern: "random.html",
-          launchOptions: {
-            args: ["--user-agent=metalsmith-pdfize"],
-          },
-        });
         const pdf = await pdfjsLib.getDocument(fileDir + "random.html.pdf")
           .promise;
 
@@ -101,16 +95,7 @@ describe("Metalsmith pdfize functional tests", function () {
   });
 
   describe("internal server", function () {
-    beforeEach(function () {
-      sinon.stub(console, "warn");
-    });
-
-    afterEach(function () {
-      console.warn.restore();
-    });
-
     it("should warn about broken external reference", async function () {
-      await build({ pattern: "broken.html" });
       assert(fs.existsSync(fileDir + "broken.html.pdf"));
       assert(fs.existsSync(fileDir + "broken.html"));
       assert(console.warn.calledOnce, "A warning should have been generated");
