@@ -1,6 +1,5 @@
 const http = require("http");
 const puppeteer = require("puppeteer");
-const multimatch = require("multimatch");
 const async = require("async");
 
 function pdfize(serverInfo, browser, printOptions, files, path, callback) {
@@ -44,7 +43,7 @@ function serveMetalsmithFiles(files) {
 module.exports = function (options) {
   return function (files, metalsmith, done) {
     const server = http.createServer(serveMetalsmithFiles(files));
-    const toExport = multimatch(Object.keys(files), options.pattern);
+    const toExport = metalsmith.match(options.pattern);
 
     server.listen(0, "127.0.0.1", () => {
       puppeteer

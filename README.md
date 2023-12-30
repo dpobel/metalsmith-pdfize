@@ -10,7 +10,7 @@ of any file registered in Metalsmith with `print` CSS media.
 
 ## Installation
 
-This plugin requires Node.js 16 or later
+This plugin requires Node.js 18 or later
 
 ```
 $ npm install metalsmith-pdfize
