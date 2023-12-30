@@ -13,6 +13,7 @@ describe("Metalsmith pdfize functional tests", function () {
   before(async () => {
     sinon.stub(console, "warn");
 
+    !fs.existsSync(fileDir) && fs.mkdirSync(fileDir);
     const ms = metalsmith(__dirname);
     ms.clean(true);
     ms.use(

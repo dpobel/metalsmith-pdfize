@@ -1,5 +1,3 @@
 node_modules/
 .nyc_output/
-tests/build/*pdf
-tests/build/*html
-tests/build/*.ico
+tests/build
