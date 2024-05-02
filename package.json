@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run lint && mocha --timeout 8000 tests",
     "coverage": "nyc -x tests mocha --timeout 8000 tests",
-    "lint": "prettier -c . && ESLINT_USE_FLAT_CONFIG=false eslint ."
+    "lint": "prettier -c . && eslint ."
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "eslint": "^9.1.1",
+    "globals": "^15.1.0",
     "is-pdf": "^1.0.0",
     "metalsmith": "^2.4.0",
     "mocha": "^10.0.0",
