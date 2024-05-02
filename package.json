@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run lint && mocha --timeout 8000 tests",
     "coverage": "nyc -x tests mocha --timeout 8000 tests",
-    "lint": "prettier -c . && eslint ."
+    "lint": "prettier -c . && ESLINT_USE_FLAT_CONFIG=false eslint ."
   },
   "repository": {
     "type": "git",
