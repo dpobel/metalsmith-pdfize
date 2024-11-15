@@ -13,6 +13,18 @@ describe("Metalsmith pdfize functional tests", function () {
   before(async () => {
     sinon.stub(console, "warn");
 
+    if (!Promise.withResolver) {
+      // https://stackoverflow.com/a/78710614
+      Promise.withResolvers = function () {
+        let resolve, reject;
+        const promise = new Promise((res, rej) => {
+          resolve = res;
+          reject = rej;
+        });
+        return { promise, resolve, reject };
+      };
+    }
+
     !fs.existsSync(fileDir) && fs.mkdirSync(fileDir);
     const ms = metalsmith(__dirname);
     ms.clean(true);
