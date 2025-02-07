@@ -31,6 +31,9 @@ describe("Metalsmith pdfize functional tests", function () {
     ms.use(
       pdfize({
         pattern: "*pdf.html",
+        launchOptions: {
+          args: ["--no-sandbox"],
+        },
       }),
     );
     ms.use(
@@ -41,7 +44,7 @@ describe("Metalsmith pdfize functional tests", function () {
           width: "500px",
         },
         launchOptions: {
-          args: ["--user-agent=metalsmith-pdfize"],
+          args: ["--user-agent=metalsmith-pdfize", "--no-sandbox"],
         },
       }),
     );
