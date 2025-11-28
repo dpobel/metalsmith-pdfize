@@ -5,8 +5,9 @@ const assert = require("assert");
 const isPdf = require("is-pdf");
 const path = require("path");
 const sinon = require("sinon");
+const { beforeEach, before, after, describe, it } = require("node:test");
 
-describe("Metalsmith pdfize functional tests", function () {
+describe("Metalsmith pdfize functional tests", () => {
   const buildDir = "build/";
   const fileDir = path.join(__dirname, buildDir);
 
@@ -15,7 +16,7 @@ describe("Metalsmith pdfize functional tests", function () {
 
     if (!Promise.withResolver) {
       // https://stackoverflow.com/a/78710614
-      Promise.withResolvers = function () {
+      Promise.withResolvers = () => {
         let resolve, reject;
         const promise = new Promise((res, rej) => {
           resolve = res;
@@ -57,7 +58,7 @@ describe("Metalsmith pdfize functional tests", function () {
   });
 
   describe("matching", () => {
-    it("should create a pdf for matched documents", async function () {
+    it("should create a pdf for matched documents", async () => {
       assert(fs.existsSync(fileDir + "another-to-pdf.html.pdf"));
       assert(isPdf(fs.readFileSync(fileDir + "another-to-pdf.html.pdf")));
       assert(fs.existsSync(fileDir + "another-to-pdf.html"));
@@ -70,7 +71,7 @@ describe("Metalsmith pdfize functional tests", function () {
       assert(fs.existsSync(fileDir + "left-alone.html"));
     });
 
-    it("should support several match pattern", async function () {
+    it("should support several match pattern", async () => {
       assert(fs.existsSync(fileDir + "random.html.pdf"));
       assert(isPdf(fs.readFileSync(fileDir + "random.html.pdf")));
       assert(fs.existsSync(fileDir + "random.html"));
@@ -81,15 +82,15 @@ describe("Metalsmith pdfize functional tests", function () {
     });
   });
 
-  describe("options", function () {
+  describe("options", () => {
     let pdfjsLib;
 
-    beforeEach(async function () {
+    beforeEach(async () => {
       pdfjsLib = await import("pdfjs-dist");
     });
 
     describe("print options", () => {
-      it("should take print options into account", async function () {
+      it("should take print options into account", async () => {
         const pdf = await pdfjsLib.getDocument(fileDir + "random.html.pdf")
           .promise;
 
@@ -100,7 +101,7 @@ describe("Metalsmith pdfize functional tests", function () {
     });
 
     describe("launch options", () => {
-      it("should take launch options into account", async function () {
+      it("should take launch options into account", async () => {
         const pdf = await pdfjsLib.getDocument(fileDir + "random.html.pdf")
           .promise;
 
@@ -110,8 +111,8 @@ describe("Metalsmith pdfize functional tests", function () {
     });
   });
 
-  describe("internal server", function () {
-    it("should warn about broken external reference", async function () {
+  describe("internal server", () => {
+    it("should warn about broken external reference", async () => {
       assert(fs.existsSync(fileDir + "broken.html.pdf"));
       assert(fs.existsSync(fileDir + "broken.html"));
       assert(console.warn.calledOnce, "A warning should have been generated");

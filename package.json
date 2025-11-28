@@ -4,8 +4,8 @@
   "description": "Metalsmith plugin to export files to PDF.",
   "main": "pdfize.js",
   "scripts": {
-    "test": "npm run lint && mocha --timeout 8000 tests",
-    "coverage": "nyc -x tests mocha --timeout 8000 tests",
+    "test": "npm run lint && node --test tests/functional.js",
+    "coverage": "node --experimental-test-coverage --test tests/functional.js",
     "lint": "prettier -c . && eslint ."
   },
   "repository": {
@@ -37,8 +37,6 @@
     "globals": "^16.0.0",
     "is-pdf": "^1.0.0",
     "metalsmith": "^2.4.0",
-    "mocha": "^11.1.0",
-    "nyc": "^17.0.0",
     "pdfjs-dist": "^4.0.269",
     "prettier": "^3.1.1",
     "sinon": "^21.0.0"
