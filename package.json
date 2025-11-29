@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run lint && node --test tests/functional.js",
     "coverage": "node --experimental-test-coverage --test tests/functional.js",
-    "lint": "prettier -c . && eslint ."
+    "lint": "biome check"
   },
   "repository": {
     "type": "git",
@@ -32,13 +32,10 @@
     "puppeteer": "^24.2.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.1.1",
-    "eslint": "^9.1.1",
-    "globals": "^16.0.0",
+    "@biomejs/biome": "^2.3.8",
     "is-pdf": "^1.0.0",
     "metalsmith": "^2.4.0",
     "pdfjs-dist": "^4.0.269",
-    "prettier": "^3.1.1",
     "sinon": "^21.0.0"
   },
   "peerDependencies": {
