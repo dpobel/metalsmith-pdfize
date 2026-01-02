@@ -4,15 +4,14 @@ const fs = require("fs");
 const assert = require("assert");
 const isPdf = require("is-pdf");
 const path = require("path");
-const sinon = require("sinon");
-const { beforeEach, before, after, describe, it } = require("node:test");
+const { beforeEach, before, after, describe, it, mock } = require("node:test");
 
 describe("Metalsmith pdfize functional tests", () => {
   const buildDir = "build/";
   const fileDir = path.join(__dirname, buildDir);
 
   before(async () => {
-    sinon.stub(console, "warn");
+    mock.method(console, "warn");
 
     if (!Promise.withResolver) {
       // https://stackoverflow.com/a/78710614
@@ -54,7 +53,7 @@ describe("Metalsmith pdfize functional tests", () => {
   });
 
   after(async () => {
-    console.warn.restore();
+    console.warn.mock.restore();
   });
 
   describe("matching", () => {
@@ -115,7 +114,11 @@ describe("Metalsmith pdfize functional tests", () => {
     it("should warn about broken external reference", async () => {
       assert(fs.existsSync(fileDir + "broken.html.pdf"));
       assert(fs.existsSync(fileDir + "broken.html"));
-      assert(console.warn.calledOnce, "A warning should have been generated");
+      assert.equal(
+        console.warn.mock.callCount(),
+        1,
+        "A warning should have been generated",
+      );
     });
   });
 });
